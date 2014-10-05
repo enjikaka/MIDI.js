@@ -433,12 +433,7 @@ if (window.AudioContext || window.webkitAudioContext) (function () {
 		sources[channel + "" + note] = source;
 		source.buffer = audioBuffers[instrument + "" + note];
 		source.connect(ctx.destination);
-		///
-		if (ctx.createGain) { // firefox
-			source.gainNode = ctx.createGain();
-		} else { // chrome
-			source.gainNode = ctx.createGainNode();
-		}
+		source.gainNode = ctx.createGain();
 		var value = (velocity / 127) * (masterVolume / 127) * 2 - 1;
 		source.gainNode.connect(ctx.destination);
 		source.gainNode.gain.value = Math.max(-1, value);
